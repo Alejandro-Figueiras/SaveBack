@@ -1,0 +1,20 @@
+{
+  "name": "SaveBack",
+  "version": "1.0.0",
+  "description": "Pequeño programa para ayudar a los usuarios a tener una copia de seguridad fisica de sus archivos contra las perdidas.",
+  "main": "dist/index.js",
+  "scripts": {
+    "start": "electron dist/index.js",
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "keywords": [],
+  "author": "",
+  "license": "ISC",
+  "dependencies": {
+    "inquirer": "^8.2.4",
+    "uuid": "^8.3.2"
+  },
+  "devDependencies": {
+    "electron": "^18.2.0"
+  }
+}
