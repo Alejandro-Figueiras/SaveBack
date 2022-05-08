@@ -2,6 +2,8 @@ import { app, BrowserWindow } from "electron";
 import Configuracion from "./Configuracion";
 import path from "path";
 import fs from "fs";
+import { backup } from "./Backuper";
+import CopyBox from "./CopyBox";
 
 
 app.on("ready", e => {
@@ -12,8 +14,12 @@ app.on("ready", e => {
     test();
 });
 
+app.on("quit", e => {
+    Configuracion.guardar();
+})
+
 function test() {
     let a = fs.statSync("E:\\Proyectos\\Vuzux\\vuzux\\vuzux\\src\\configuracion\\Configuracion.js");
-    console.log(a);
+    console.log(backup(new CopyBox("a", "a", "E:\\Proyectos\\Vuzux\\vuzux\\vuzux\\src\\")));
     
 }

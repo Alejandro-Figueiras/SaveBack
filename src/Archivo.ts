@@ -36,4 +36,8 @@ export default class Archivo {
         return this.mtime;
     }
 
+    isDiferente(stats:any) {
+        // TODO hacer function para comprobar
+    }
+
 }
