@@ -1,9 +1,10 @@
+import Archivo from "./Archivo";
 
-class CopyBox {
+export default class CopyBox {
     private id:string;
     private nombre:string;
     private ruta: string;
-    private archivos:string[];
+    private archivos:Archivo[];
 
     constructor(id:string, nombre:string, ruta:string) {
         this.id = id;
@@ -12,6 +13,10 @@ class CopyBox {
         
         // TODO archivos list
         this.archivos = [];
+    }
+
+    static iniciarJSON(json: any) {
+        return new CopyBox(json.id, json.nombre, json.ruta);
     }
 
     getID() {

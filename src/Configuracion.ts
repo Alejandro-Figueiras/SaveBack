@@ -1,4 +1,9 @@
 import fs from "fs";
+import CopyBox from "./CopyBox";
+
+interface finalJSON {
+	boxes: Object[]
+}
 
 export default class Configuracion {
 	
@@ -10,22 +15,26 @@ export default class Configuracion {
 		this.verificar();
 
 		const rutaConfig = this.ruta+"config.json";
+		let json:finalJSON;
         if (fs.existsSync(rutaConfig)) {
             let file = fs.readFileSync(rutaConfig, 'utf-8');
-            return JSON.parse(file);
+            json = JSON.parse(file);
         } else {
-            return {}
+            json = {
+				boxes:[]
+			}
         }
+
+		// Parsing boxes
+		this.boxes = [];
+		for (let box of json.boxes) {
+			this.boxes.push(CopyBox.iniciarJSON(box));
+		}
 	}
 
 	static guardar() {
-		interface finalJSON {
-			boxes: Object[]
-		}
-
 		let json:finalJSON = {boxes:[]};
 		
-
 		// Parsing boxes
 		for (let box of this.boxes) {
 			json.boxes.push(box.toJSON());
