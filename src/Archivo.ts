@@ -37,7 +37,14 @@ export default class Archivo {
     }
 
     isDiferente(stats:any) {
-        // TODO hacer function para comprobar
+        if (stats.size == this.size &&
+            stats.ctime == this.ctime &&
+            stats.mtime == this.mtime
+          ) {
+            return true;
+        } else {
+            return false;
+        }
     }
 
 }

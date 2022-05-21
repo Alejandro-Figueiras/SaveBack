@@ -1,13 +1,15 @@
 import CopyBox from "./CopyBox";
 import fs from "fs";
 import Archivo from "./Archivo";
+import ArchivoModificado from "./ArchivoModificado";
 
+// IMPORTANTE MODIFICAR ADEMAS EN ArchivoModificado.ts
 interface archivoExplorado {
     ruta:string,
     stat:any
 }
 
-const explorarDirectorio = (ruta:string, rutaRelativa:string) => {
+const explorarDirectorio = (ruta:string, rutaRelativa:string = "") => {
     // La ruta y la ruta relativa ambas deben contener un / al final
     let archivos:archivoExplorado[] = [];
 
@@ -31,22 +33,33 @@ const explorarDirectorio = (ruta:string, rutaRelativa:string) => {
 
 export const backup = (box: CopyBox) => {
     // Leer archivos
-    let archivos = explorarDirectorio(box.getRuta(), "");
-    let archivosUpdate:Archivo[] = [];
+    let archivos = explorarDirectorio(box.getRuta());
+    let archivosUpdate:ArchivoModificado[] = [];
+    let archivosVistos:any[] = [];
     for (let arch of box.getArchivos()) {
         let encontrado = false;
         for (let archivo of archivos) {
             if (archivo.ruta == arch.getRutaRelativa()) {
                 encontrado = true;
-                // TODO if box.isDiferente y hacer funcion
-                // TODO encontrado
+                archivosVistos.push(archivo);
+                if (arch.isDiferente(archivo.stat)) {
+                    // Modificado
+                    archivosUpdate.push(new ArchivoModificado(arch, archivo, 1));
+                }
             }
         }
 
         if (!encontrado) {
-            // TODO eliminado
+            // Eliminado
+            archivosUpdate.push(new ArchivoModificado(arch, {ruta:arch.getRutaRelativa(), stat:{}}, 3));
         }
-            
-        
     }
+
+    // Esto elimina los archivos ya vistos, dejando los nuevos para ser procesados
+    for (let visto of archivosVistos) archivos.splice(archivos.findIndex(visto), 1);
+
+    // TODO nuevos
+    
+    // TODO revisar q esto funcione bien
+
 }
