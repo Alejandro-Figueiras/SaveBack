@@ -1,7 +1,6 @@
 import { app, BrowserWindow } from "electron";
 import Configuracion from "./Configuracion";
 import path from "path";
-import fs from "fs";
 import { backup } from "./Backuper";
 import CopyBox from "./CopyBox";
 

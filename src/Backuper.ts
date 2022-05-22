@@ -71,5 +71,9 @@ export const backup = (box: CopyBox) => {
     console.log(a);
     
     // TODO hacer la copia a algun lugar
+    // TEMPORAL staged
+    for (let archiv of archivosUpdate) {
+        
+    }
 
 }
