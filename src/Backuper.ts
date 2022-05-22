@@ -2,6 +2,7 @@ import CopyBox from "./CopyBox";
 import fs from "fs";
 import Archivo from "./Archivo";
 import ArchivoModificado from "./ArchivoModificado";
+const uuid = require('uuid').v4;
 
 // IMPORTANTE MODIFICAR ADEMAS EN ArchivoModificado.ts
 interface archivoExplorado {
@@ -58,8 +59,17 @@ export const backup = (box: CopyBox) => {
     // Esto elimina los archivos ya vistos, dejando los nuevos para ser procesados
     for (let visto of archivosVistos) archivos.splice(archivos.findIndex(visto), 1);
 
-    // TODO nuevos
+    // Nuevos
+    for (let archivo of archivos) {
+        let id = uuid();
+        let arch = new Archivo(id,archivo.ruta, archivo.stat.size, archivo.stat.ctime, archivo.stat.mtime);
+        archivosUpdate.push(new ArchivoModificado(arch, archivo, 2));
+    }
     
-    // TODO revisar q esto funcione bien
+    // test
+    for (let a of archivosUpdate) 
+    console.log(a);
+    
+    // TODO hacer la copia a algun lugar
 
 }

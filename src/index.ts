@@ -19,7 +19,6 @@ app.on("quit", e => {
 })
 
 function test() {
-    let a = fs.statSync("E:\\Proyectos\\Vuzux\\vuzux\\vuzux\\src\\configuracion\\Configuracion.js");
-    console.log(backup(new CopyBox("a", "a", "E:\\Proyectos\\Vuzux\\vuzux\\vuzux\\src\\")));
+    console.log(backup(new CopyBox("a", "a", "A:/Usuario/Desktop/SaveBack/dist/")));
     
 }
